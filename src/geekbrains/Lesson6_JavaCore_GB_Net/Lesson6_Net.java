@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.Properties;
 
 public class Lesson6_Net {
@@ -27,10 +28,9 @@ public class Lesson6_Net {
                 .addQueryParameter("hours", prop.getProperty("HOURS"))
                 .addQueryParameter("extra", prop.getProperty("EXTRA"))
                 .addQueryParameter("extra", prop.getProperty("EXTRA"))
-
                 .build();
 
-        System.out.println(url.toString());
+        System.out.println(url);
 
         Request requestToYandex = new Request.Builder()
                 .addHeader("accept", "application/json")
@@ -39,7 +39,7 @@ public class Lesson6_Net {
                 .get()
                 .build();
 
-        String jsonResponse = client.newCall(requestToYandex).execute().body().string();
+        String jsonResponse = Objects.requireNonNull(client.newCall(requestToYandex).execute().body()).string();
         System.out.println(jsonResponse);
 
     }
